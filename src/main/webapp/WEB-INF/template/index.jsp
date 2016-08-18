@@ -16,10 +16,10 @@
     <body>
         <h1>Welcome Special Project!</h1>
         <hr>
-        <form method="POST">
-            User:<input type="text" name="username" value="" /><br>
-            Password:<input type="password" name="password" value="" /><br>
+        <sf:form method="POST" commandName="authInfo">
+            Account:<sf:input path="account" /><br>
+            Password:<sf:password path="password" /><br>
             <input type="submit" value="Sign in" /> <a href="/register">Sign Up</a>
-        </form>
+        </sf:form>
     </body>
 </html>

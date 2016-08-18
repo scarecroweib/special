@@ -13,27 +13,27 @@ import java.util.Objects;
  */
 public class AuthInfo {
     private Long id;
-    private Long userId;
+    private String account;
     private String password;
     
     public AuthInfo(){}
     
-    public AuthInfo(Long id, Long userId, String password){
+    public AuthInfo(Long id, String account, String password){
         this.id = id;
-        this.userId = userId;
+        this.account = account;
         this.password = password;
     }
     
-    public AuthInfo(Long userId, String password){
-        this(null, userId, password);
+    public AuthInfo(String account, String password){
+        this(null, account, password);
     }
 
-    public Long getUserId() {
-        return userId;
+    public String getAccount() {
+        return account;
     }
 
-    public void setUserId(Long userId) {
-        this.userId = userId;
+    public void setAccount(String account) {
+        this.account = account;
     }
 
     public String getPassword() {
@@ -48,7 +48,7 @@ public class AuthInfo {
     public int hashCode() {
         int hash = 7;
         hash = 97 * hash + Objects.hashCode(this.id);
-        hash = 97 * hash + Objects.hashCode(this.userId);
+        hash = 97 * hash + Objects.hashCode(this.account);
         hash = 97 * hash + Objects.hashCode(this.password);
         return hash;
     }
@@ -68,7 +68,7 @@ public class AuthInfo {
         if (!Objects.equals(this.password, other.password)) {
             return false;
         }
-        return Objects.equals(this.userId, other.userId);
+        return Objects.equals(this.account, other.account);
     }
     
     

@@ -13,6 +13,7 @@ import java.util.Objects;
  */
 public class User {
     private Long id;
+    private Long authId;
     private String firstName;
     private String lastName;
     private String nickname;
@@ -20,8 +21,9 @@ public class User {
     
     public User(){}
     
-    public User(Long id, String firstName, String lastName, String username, String email){
+    public User(Long id, Long authId, String firstName, String lastName, String username, String email){
         this.id = id;
+        this.authId = authId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.nickname = username;
@@ -29,7 +31,7 @@ public class User {
     }
     
     public User(String firstName, String lastName, String username, String email){
-        this(null, firstName, lastName, username, email);
+        this(null, null, firstName, lastName, username, email);
     }
 
     public Long getId() {
@@ -38,6 +40,22 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getAuthId() {
+        return authId;
+    }
+
+    public void setAuthId(Long authId) {
+        this.authId = authId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public String getFirstName() {
@@ -56,14 +74,6 @@ public class User {
         this.lastName = lastName;
     }
 
-    public String getUsername() {
-        return nickname;
-    }
-
-    public void setUsername(String username) {
-        this.nickname = username;
-    }
-    
     public String getEmail() {
         return email;
     }
@@ -76,6 +86,7 @@ public class User {
     public int hashCode() {
         int hash = 3;
         hash = 41 * hash + Objects.hashCode(this.id);
+        hash = 41 * hash + Objects.hashCode(this.authId);
         hash = 41 * hash + Objects.hashCode(this.firstName);
         hash = 41 * hash + Objects.hashCode(this.lastName);
         hash = 41 * hash + Objects.hashCode(this.nickname);

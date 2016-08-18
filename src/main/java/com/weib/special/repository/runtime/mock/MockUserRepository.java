@@ -18,13 +18,13 @@ public class MockUserRepository implements UserRepository {
 
     @Override
     public User save(User unsaveUser) {
-        User savedUser = new User(1L, "zhang", "jingwei", "weib", "weib@126.com");
+        User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@126.com");
         return savedUser;
     }
 
     @Override
     public User update(User updateUser) {
-        User savedUser = new User(1L, "zhang", "jingwei", "weib", "weib@126.com");
+        User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@126.com");
         return savedUser;
     }
 
@@ -35,7 +35,7 @@ public class MockUserRepository implements UserRepository {
 
     @Override
     public User findById(Long id) {
-        User savedUser = new User(id, "zhang", "jingwei", "weib", "weib@126.com");
+        User savedUser = new User(id, 1L, "zhang", "jingwei", "weib", "weib@126.com");
         return savedUser;
     }
     

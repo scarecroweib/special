@@ -5,6 +5,7 @@
  */
 package com.weib.special.controller;
 
+import com.weib.special.data.AuthInfo;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,7 +22,7 @@ public class IndexController {
     @RequestMapping(value="/", method=RequestMethod.GET)
     public String applicationIndex(Model model){
         
-        //TODO:
+        model.addAttribute("authInfo", new AuthInfo());
         
         return "index";
     }
