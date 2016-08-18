@@ -49,7 +49,7 @@ public class IndexController {
         
         User user = userRepository.auth(authInfo);
         if(user == null || user.getAuthId() == null){
-            model.addAttribute("error", "Error_Auth_Failed");
+            model.addAttribute("autherror", "Error_Auth_Failed");
             return "index";
         }
         
