@@ -1,6 +1,6 @@
 <%-- 
-    Document   : index
-    Created on : 2016-8-17, 15:18:11
+    Document   : form
+    Created on : 2016-8-18, 11:48:30
     Author     : zhangjingwei
 --%>
 
@@ -14,12 +14,6 @@
         <title>JSP Page</title>
     </head>
     <body>
-        <h1>Welcome Special Project!</h1>
-        <hr>
-        <form method="POST">
-            User:<input type="text" name="username" value="" /><br>
-            Password:<input type="password" name="password" value="" /><br>
-            <input type="submit" value="Sign in" /> <a href="/register">Sign Up</a>
-        </form>
+        <h1>Hello World!</h1>
     </body>
 </html>

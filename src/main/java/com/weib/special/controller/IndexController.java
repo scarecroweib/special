@@ -23,7 +23,6 @@ public class IndexController {
         
         //TODO:
         
-        model.addAttribute("name", "weib");
         return "index";
     }
     
