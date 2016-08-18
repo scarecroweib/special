@@ -5,6 +5,7 @@
  */
 package com.weib.special.repository;
 
+import com.weib.special.data.AuthInfo;
 import com.weib.special.data.User;
 
 /**
@@ -19,4 +20,7 @@ public interface UserRepository {
     void delete(User deleteUser);
     
     User findById(Long id);
+    
+    User auth(AuthInfo authInfo);
+
 }

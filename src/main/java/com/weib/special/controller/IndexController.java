@@ -6,8 +6,13 @@
 package com.weib.special.controller;
 
 import com.weib.special.data.AuthInfo;
+import com.weib.special.data.User;
+import com.weib.special.repository.UserRepository;
+import javax.validation.Valid;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.Errors;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -19,7 +24,14 @@ import org.springframework.web.bind.annotation.RequestMethod;
 @RequestMapping("/")
 public class IndexController {
     
-    @RequestMapping(value="/", method=RequestMethod.GET)
+    private UserRepository userRepository;
+    
+    @Autowired
+    public void setUserRepository(UserRepository userRepository){
+        this.userRepository = userRepository;
+    }
+    
+    @RequestMapping(method=RequestMethod.GET)
     public String applicationIndex(Model model){
         
         model.addAttribute("authInfo", new AuthInfo());
@@ -27,4 +39,20 @@ public class IndexController {
         return "index";
     }
     
+    @RequestMapping(method=RequestMethod.POST)
+    public String processLogin(@Valid AuthInfo authInfo, Errors errors, Model model){
+        if(errors.hasErrors()){
+            model.addAttribute("errors", errors);
+            model.addAttribute("authInfo", authInfo);
+            return "index";
+        }
+        
+        User user = userRepository.auth(authInfo);
+        if(user == null || user.getAuthId() == null){
+            model.addAttribute("error", "Error_Auth_Failed");
+            return "index";
+        }
+        
+        return "redirect:/user/" + user.getId();
+    }
 }

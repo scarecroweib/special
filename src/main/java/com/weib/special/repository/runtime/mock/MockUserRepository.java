@@ -5,6 +5,7 @@
  */
 package com.weib.special.repository.runtime.mock;
 
+import com.weib.special.data.AuthInfo;
 import com.weib.special.data.User;
 import com.weib.special.repository.UserRepository;
 import org.springframework.stereotype.Component;
@@ -38,5 +39,11 @@ public class MockUserRepository implements UserRepository {
         User savedUser = new User(id, 1L, "zhang", "jingwei", "weib", "weib@126.com");
         return savedUser;
     }
-    
+
+    @Override
+    public User auth(AuthInfo authInfo) {
+        User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@126.com");
+        return savedUser;
+    }
+
 }
