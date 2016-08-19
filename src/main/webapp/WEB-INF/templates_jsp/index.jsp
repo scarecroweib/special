@@ -12,6 +12,7 @@
 <html>
     <head>
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <link rel="stylesheet" type="text/css" href="<s:url value="/public/css/mod.css" />" />
         <title><s:message code="System.title" /></title>
     </head>
     <body>
@@ -21,9 +22,9 @@
             <li><s:message code="${autherror}" /></li>
         </c:if>
         <sf:form method="POST" commandName="authInfo">
-            Account:<sf:input path="account" /><sf:errors path="account" /><br>
-            Password:<sf:password path="password" /><sf:errors path="password" /><br>
-            <input type="submit" value="Sign in" /> <a href="<s:url value="/register" />">Sign Up</a>
+            <s:message code="Index.tag.account" /><sf:input path="account" /><sf:errors path="account" /><br>
+            <s:message code="Index.tag.password" /><sf:password path="password" /><sf:errors path="password" /><br>
+            <input type="submit" value="<s:message code="Index.btn.signin" />" /> <a href="<s:url value="/register" />"><s:message code="Index.btn.signup" /></a>
         </sf:form>
     </body>
 </html>

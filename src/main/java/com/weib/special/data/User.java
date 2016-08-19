@@ -19,6 +19,14 @@ public class User {
     private Long id;
     private Long authId;
     
+    @NotNull(message="{account.null}")
+    @Size(min=5, max=20, message="{account.size}")
+    private String account;
+    
+    @NotNull(message="{password.null}")
+    @Size(min=6, max=50, message="{password.size}")
+    private String password;
+    
     @NotNull(message="{firstName.null}")
     @Size(min=3, max=20, message="{firstName.size}")
     private String firstName;
@@ -32,7 +40,7 @@ public class User {
     private String nickname;
     
     @NotEmpty(message="{email.empty}")
-    @Email(message="email.format")
+    @Email(message="{email.format}")
     private String email;
     
     public User(){}
@@ -64,6 +72,22 @@ public class User {
 
     public void setAuthId(Long authId) {
         this.authId = authId;
+    }
+
+    public String getAccount() {
+        return account;
+    }
+
+    public void setAccount(String account) {
+        this.account = account;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 
     public String getNickname() {

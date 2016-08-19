@@ -31,6 +31,21 @@ public class UserControllerTest {
         UserController controller = new UserController(userRepository);
         MockMvc mockMvc = standaloneSetup(controller).build();
         
+        mockMvc.perform(get("/user/profile"))
+                .andExpect(view().name("user/profile"))
+                .andExpect(model().attributeExists("user"))
+                .andExpect(model().attribute("user", user));
+    }
+    
+    @Test
+    public void userInfoTest() throws Exception{
+        User user = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@sohu.com");
+        UserRepository userRepository = mock(UserRepository.class);
+        when(userRepository.findById(1L)).thenReturn(user);
+        
+        UserController controller = new UserController(userRepository);
+        MockMvc mockMvc = standaloneSetup(controller).build();
+        
         mockMvc.perform(get("/user/1"))
                 .andExpect(view().name("user/profile"))
                 .andExpect(model().attributeExists("user"))

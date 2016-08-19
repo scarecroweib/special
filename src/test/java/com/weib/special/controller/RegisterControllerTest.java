@@ -37,7 +37,11 @@ public class RegisterControllerTest {
     @Test
     public void processRegisterTest() throws Exception{
         User unsaveUser = new User("zhang", "jingwei", "weib11", "weib@sohu.com");
+        unsaveUser.setAccount("scarecroweib");
+        unsaveUser.setPassword("19841021");
         User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib11", "weib@sohu.com");
+        savedUser.setAccount("scarecroweib");
+        savedUser.setPassword("19841021");
         UserRepository repository = mock(UserRepository.class);
         when(repository.save(unsaveUser)).thenReturn(savedUser);
         
@@ -49,7 +53,9 @@ public class RegisterControllerTest {
                 .param("lastName", "jingwei")
                 .param("nickname", "weib11")
                 .param("email", "weib@sohu.com")
-                ).andExpect(MockMvcResultMatchers.redirectedUrl("/user/1"));
+                .param("account", "scarecroweib")
+                .param("password", "19841021")
+                ).andExpect(MockMvcResultMatchers.redirectedUrl("/user/profile"));
     }
     
 }

@@ -28,8 +28,17 @@ public class UserController {
         this.userRepository = userRepository;
     }
     
+    @RequestMapping(value="/profile", method=RequestMethod.GET)
+    public String profile(Model model){
+        long userid = 1L;
+        
+        User user = userRepository.findById(userid);
+        model.addAttribute(user);
+        return "user/profile";
+    }
+    
     @RequestMapping(value="/{userid}", method=RequestMethod.GET)
-    public String profile(@PathVariable long userid, Model model){
+    public String userInfo(@PathVariable long userid, Model model){
         User user = userRepository.findById(userid);
         model.addAttribute(user);
         return "user/profile";
