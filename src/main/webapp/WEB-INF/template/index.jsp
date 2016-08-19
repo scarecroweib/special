@@ -15,7 +15,7 @@
         <title><s:message code="System.title" /></title>
     </head>
     <body>
-        <h1><s:message code="System.WelcomeMessage" /></h1>
+        <h1><s:message code="Index.title" /></h1>
         <hr>
         <c:if test="${autherror != null}" >
             <li><s:message code="${autherror}" /></li>
@@ -23,7 +23,7 @@
         <sf:form method="POST" commandName="authInfo">
             Account:<sf:input path="account" /><sf:errors path="account" /><br>
             Password:<sf:password path="password" /><sf:errors path="password" /><br>
-            <input type="submit" value="Sign in" /> <a href="/register">Sign Up</a>
+            <input type="submit" value="Sign in" /> <a href="<s:url value="/register" />">Sign Up</a>
         </sf:form>
     </body>
 </html>

@@ -36,8 +36,8 @@ public class RegisterControllerTest {
     
     @Test
     public void processRegisterTest() throws Exception{
-        User unsaveUser = new User("zhang", "jingwei", "weib", "weib@sohu.com");
-        User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@sohu.com");
+        User unsaveUser = new User("zhang", "jingwei", "weib11", "weib@sohu.com");
+        User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib11", "weib@sohu.com");
         UserRepository repository = mock(UserRepository.class);
         when(repository.save(unsaveUser)).thenReturn(savedUser);
         
@@ -47,7 +47,7 @@ public class RegisterControllerTest {
         mockMvc.perform(post("/register")
                 .param("firstName", "zhang")
                 .param("lastName", "jingwei")
-                .param("nickname", "weib")
+                .param("nickname", "weib11")
                 .param("email", "weib@sohu.com")
                 ).andExpect(MockMvcResultMatchers.redirectedUrl("/user/1"));
     }

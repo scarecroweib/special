@@ -6,6 +6,10 @@
 package com.weib.special.data;
 
 import java.util.Objects;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import org.hibernate.validator.constraints.Email;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -14,9 +18,21 @@ import java.util.Objects;
 public class User {
     private Long id;
     private Long authId;
+    
+    @NotNull(message="{firstName.null}")
+    @Size(min=3, max=20, message="{firstName.size}")
     private String firstName;
+    
+    @NotNull(message="{lastName.null}")
+    @Size(min=5, max=20, message="{lastName.size}")
     private String lastName;
+    
+    @NotNull(message="{nickname.null}")
+    @Size(min=1, max=15, message="{nickname.size}")
     private String nickname;
+    
+    @NotEmpty(message="{email.empty}")
+    @Email(message="email.format")
     private String email;
     
     public User(){}
