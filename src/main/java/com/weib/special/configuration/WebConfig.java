@@ -13,11 +13,11 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
-//import org.thymeleaf.TemplateEngine;
-//import org.thymeleaf.spring4.SpringTemplateEngine;
-//import org.thymeleaf.spring4.view.ThymeleafViewResolver;
-//import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
-//import org.thymeleaf.templateresolver.TemplateResolver;
+import org.thymeleaf.TemplateEngine;
+import org.thymeleaf.spring4.SpringTemplateEngine;
+import org.thymeleaf.spring4.view.ThymeleafViewResolver;
+import org.thymeleaf.templateresolver.ServletContextTemplateResolver;
+import org.thymeleaf.templateresolver.TemplateResolver;
 
 /**
  *
@@ -54,7 +54,7 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //    }
 //    
 //    @Bean
-//    public TemplateEngine templateEngine(TemplateResolver templateResolver){
+//    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver){
 //        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
 //        templateEngine.setTemplateResolver(templateResolver);
 //        return templateEngine;
