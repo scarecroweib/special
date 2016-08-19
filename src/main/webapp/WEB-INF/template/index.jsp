@@ -17,8 +17,8 @@
     <body>
         <h1>Welcome Special Project!</h1>
         <hr>
-        <c:if test="autherror != null" >
-            <div><s:message code="autherror" /></div>
+        <c:if test="${autherror != null}" >
+            <li><s:message code="${autherror}" /></li>
         </c:if>
         <sf:form method="POST" commandName="authInfo">
             Account:<sf:input path="account" /><br>
