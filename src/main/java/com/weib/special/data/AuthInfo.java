@@ -6,6 +6,7 @@
 package com.weib.special.data;
 
 import java.util.Objects;
+import org.hibernate.validator.constraints.NotEmpty;
 
 /**
  *
@@ -13,7 +14,11 @@ import java.util.Objects;
  */
 public class AuthInfo {
     private Long id;
+    
+    @NotEmpty(message="{account.null}")
     private String account;
+    
+    @NotEmpty(message="{password.null}")
     private String password;
     
     public AuthInfo(){}
