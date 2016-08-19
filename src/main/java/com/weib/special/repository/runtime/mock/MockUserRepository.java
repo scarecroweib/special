@@ -8,6 +8,7 @@ package com.weib.special.repository.runtime.mock;
 import com.weib.special.data.AuthInfo;
 import com.weib.special.data.User;
 import com.weib.special.repository.UserRepository;
+import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 /**
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Component;
  * @author zhangjingwei
  */
 @Component
+@Profile("mock")
 public class MockUserRepository implements UserRepository {
 
     @Override
@@ -43,7 +45,7 @@ public class MockUserRepository implements UserRepository {
     @Override
     public User auth(AuthInfo authInfo) {
         User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@126.com");
-        return null;
+        return savedUser;
     }
 
 }
