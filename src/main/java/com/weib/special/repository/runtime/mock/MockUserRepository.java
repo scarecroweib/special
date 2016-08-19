@@ -43,7 +43,7 @@ public class MockUserRepository implements UserRepository {
     @Override
     public User auth(AuthInfo authInfo) {
         User savedUser = new User(1L, 1L, "zhang", "jingwei", "weib", "weib@126.com");
-        return savedUser;
+        return null;
     }
 
 }
