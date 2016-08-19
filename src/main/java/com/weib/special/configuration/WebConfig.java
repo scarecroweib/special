@@ -13,6 +13,8 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 import org.springframework.web.servlet.view.JstlView;
+import org.springframework.web.servlet.view.tiles3.TilesConfigurer;
+import org.springframework.web.servlet.view.tiles3.TilesViewResolver;
 import org.thymeleaf.TemplateEngine;
 import org.thymeleaf.spring4.SpringTemplateEngine;
 import org.thymeleaf.spring4.view.ThymeleafViewResolver;
@@ -40,6 +42,18 @@ public class WebConfig extends WebMvcConfigurerAdapter {
         resolver.setViewClass(JstlView.class);
         return resolver;
     }
+    
+//    @Bean
+//    public ViewResolver viewResolver(){
+//        return new TilesViewResolver();
+//    }
+//    
+//    @Bean
+//    public TilesConfigurer tilesConfigurer(){
+//        TilesConfigurer tiles = new TilesConfigurer();
+//        tiles.setDefinitions(new String[]{"/WEB-INF/layout/tiles.xml"});
+//        return tiles;
+//    }
     
 //    /**
 //     * 创建视图解析器
