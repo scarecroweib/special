@@ -9,11 +9,11 @@
         <hr />
         <form method="POST" th:object="${authInfo}" >
             <div th:if="${autherror != null}">
-                <span th:text="#{autherror}">Auth Error!</span>
+                <span th:text="#{${autherror}}">Auth Error!</span>
             </div>
-            Account:<input type="text" th:field="*{account}" /><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></span><br />
-            Password:<input type="text" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br />
-            <input type="submit" value="Sign in" /> <a href="" th:href="@{/register}">Sign Up</a>
+            <span th:text="#{Index.tag.account}">Account:</span><input type="text" th:field="*{account}" /><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></span><br />
+            <span th:text="#{Index.tag.password}">Password:</span><input type="text" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br />
+            <input type="submit" th:value="#{Index.btn.signin}" value="Sign in" /> <a href="" th:href="@{/register}"><span th:text="#{Index.btn.signup}">Sign Up</span></a>
         </form>
     </body>
 </html>

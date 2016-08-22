@@ -30,18 +30,18 @@ import org.thymeleaf.templateresolver.TemplateResolver;
 @ComponentScan("com.weib.special.controller")
 public class WebConfig extends WebMvcConfigurerAdapter {
     
-    /**
-     * 创建视图解析器(JSP)
-     * @return ViewResolver
-     */
-    @Bean
-    public ViewResolver viewResolver(){
-        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-        resolver.setPrefix("/WEB-INF/templates_jsp/");
-        resolver.setSuffix(".jsp");
-        resolver.setViewClass(JstlView.class);
-        return resolver;
-    }
+//    /**
+//     * 创建视图解析器(JSP)
+//     * @return ViewResolver
+//     */
+//    @Bean
+//    public ViewResolver viewResolver(){
+//        InternalResourceViewResolver resolver = new InternalResourceViewResolver();
+//        resolver.setPrefix("/WEB-INF/templates_jsp/");
+//        resolver.setSuffix(".jsp");
+//        resolver.setViewClass(JstlView.class);
+//        return resolver;
+//    }
     
 //    @Bean
 //    public ViewResolver viewResolver(){
@@ -55,32 +55,34 @@ public class WebConfig extends WebMvcConfigurerAdapter {
 //        return tiles;
 //    }
     
-//    /**
-//     * 创建视图解析器
-//     * @param templateEngine
-//     * @return ViewResolver
-//     */
-//    @Bean
-//    public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
-//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(templateEngine);
-//        return viewResolver;
-//    }
-//    
-//    @Bean
-//    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver){
-//        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
-//        templateEngine.setTemplateResolver(templateResolver);
-//        return templateEngine;
-//    }
-//    
-//    @Bean
-//    public TemplateResolver templateResolver(){
-//        TemplateResolver templateResolver = new ServletContextTemplateResolver();
-//        templateResolver.setPrefix("/WEB-INF/templates_thymeleaf/");
-//        templateResolver.setSuffix(".html");
-//        templateResolver.setTemplateMode("HTML5");
-//        templateResolver.setCacheable(false);
-//        return templateResolver;
-//    }
+    /**
+     * 创建视图解析器
+     * @param templateEngine
+     * @return ViewResolver
+     */
+    @Bean
+    public ViewResolver viewResolver(SpringTemplateEngine templateEngine){
+        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
+        viewResolver.setTemplateEngine(templateEngine);
+        viewResolver.setCharacterEncoding("UTF-8");
+        return viewResolver;
+    }
+    
+    @Bean
+    public SpringTemplateEngine templateEngine(TemplateResolver templateResolver){
+        SpringTemplateEngine templateEngine = new SpringTemplateEngine();
+        templateEngine.setTemplateResolver(templateResolver);
+        return templateEngine;
+    }
+    
+    @Bean
+    public TemplateResolver templateResolver(){
+        TemplateResolver templateResolver = new ServletContextTemplateResolver();
+        templateResolver.setPrefix("/WEB-INF/templates_thymeleaf/");
+        templateResolver.setSuffix(".html");
+        templateResolver.setTemplateMode("HTML5");
+        templateResolver.setCharacterEncoding("UTF-8");
+        templateResolver.setCacheable(false);
+        return templateResolver;
+    }
 }
