@@ -12,7 +12,7 @@
                 <span th:text="#{${autherror}}">Auth Error!</span>
             </div>
             <span th:text="#{Index.tag.account}">Account:</span><input type="text" th:field="*{account}" /><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></span><br />
-            <span th:text="#{Index.tag.password}">Password:</span><input type="text" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br />
+            <span th:text="#{Index.tag.password}">Password:</span><input type="password" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br />
             <input type="submit" th:value="#{Index.btn.signin}" value="Sign in" /> <a href="" th:href="@{/register}"><span th:text="#{Index.btn.signup}">Sign Up</span></a>
         </form>
     </body>
