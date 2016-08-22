@@ -14,15 +14,15 @@ and open the template in the editor.
         <h1 th:text="#{register.title}">Sign Up</h1>
         <hr />
         <form method="POST" th:object="${user}">
-            <span th:text="#{register.tag.firstName}" ></span><input type="text" th:field="*{firstName}" /><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}"></span><br />
-            <span th:text="#{register.tag.lastName}" ></span><input type="text" th:field="*{lastName}" /><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}"></span><br />
-            <span th:text="#{register.tag.nickname}" ></span><input type="text" th:field="*{nickname}" /><span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}"></span><br />
-            <span th:text="#{register.tag.email}" ></span><input type="text" th:field="*{email}" /><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}"></span><br />
-            <span th:text="#{register.tag.account}" ></span><input type="text" th:field="*{account}" /><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}"></span><br />
-            <span th:text="#{register.tag.password}" ></span><input type="password" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}"></span><br />
+            <span th:text="#{register.tag.firstName}" >FirstName</span><input type="text" th:field="*{firstName}" /><span th:if="${#fields.hasErrors('firstName')}" th:errors="*{firstName}">firstName error!</span><br />
+            <span th:text="#{register.tag.lastName}" >LastName</span><input type="text" th:field="*{lastName}" /><span th:if="${#fields.hasErrors('lastName')}" th:errors="*{lastName}">lastName error!</span><br />
+            <span th:text="#{register.tag.nickname}" >NickName</span><input type="text" th:field="*{nickname}" /><span th:if="${#fields.hasErrors('nickname')}" th:errors="*{nickname}">nickname error!</span><br />
+            <span th:text="#{register.tag.email}" >E-Mail</span><input type="text" th:field="*{email}" /><span th:if="${#fields.hasErrors('email')}" th:errors="*{email}">email error!</span><br />
+            <span th:text="#{register.tag.account}" >Account</span><input type="text" th:field="*{account}" /><span th:if="${#fields.hasErrors('account')}" th:errors="*{account}">account error!</span><br />
+            <span th:text="#{register.tag.password}" >Password</span><input type="password" th:field="*{password}" /><span th:if="${#fields.hasErrors('password')}" th:errors="*{password}">password error!</span><br />
             <br />
             <input type="submit" value="Submit" th:value="#{register.btn.commit}" />
-            <a th:href="@{/}" ><span th:text="#{register.btn.cancel}">Cancel</span></a>
+            <a href="#" th:href="@{/}" ><span th:text="#{register.btn.cancel}">Cancel</span></a>
         </form>
     </body>
 </html>
