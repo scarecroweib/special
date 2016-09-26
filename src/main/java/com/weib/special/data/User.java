@@ -5,6 +5,7 @@
  */
 package com.weib.special.data;
 
+import java.io.Serializable;
 import java.util.Objects;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -15,8 +16,9 @@ import org.hibernate.validator.constraints.NotEmpty;
  *
  * @author zhangjingwei
  */
-public class User {
+public class User implements Serializable {
     private Long id;
+    
     private Long authId;
     
     @NotNull(message="{account.null}")

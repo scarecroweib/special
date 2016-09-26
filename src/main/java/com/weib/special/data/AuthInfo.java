@@ -75,6 +75,14 @@ public class AuthInfo {
         }
         return Objects.equals(this.account, other.account);
     }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
     
     
 }

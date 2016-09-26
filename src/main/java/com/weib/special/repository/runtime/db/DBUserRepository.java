@@ -32,7 +32,23 @@ public class DBUserRepository implements UserRepository {
     
     @Override
     public User save(User unsaveUser) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        jdbcOperater.execute("begin");
+        try{
+            String insertAuthinfo = "insert into authinfo values(0, ?, ?)";
+            jdbcOperater.update(insertAuthinfo, unsaveUser.getAccount(), unsaveUser.getPassword());
+
+            AuthInfo savedAuth = jdbcOperater.queryForObject("select * from authinfo order by id desc limit 1", this::mapAuthInfo);
+            String insertUserinfo = "insert into userinfo values(0, ?, ?, ?, ?, ?)";
+            jdbcOperater.update(insertUserinfo, savedAuth.getId(), unsaveUser.getFirstName(), unsaveUser.getLastName(), unsaveUser.getNickname(), unsaveUser.getEmail());
+
+            jdbcOperater.execute("commit");
+
+            User savedUser = jdbcOperater.queryForObject("select * from userinfo order by id desc limit 1", this::mapUserInfo);
+            return savedUser;
+        }catch(Throwable e){
+            jdbcOperater.execute("rollback");
+            throw e;
+        }
     }
 
     @Override
@@ -66,6 +82,10 @@ public class DBUserRepository implements UserRepository {
     
     private AuthInfo mapAuthInfo(ResultSet rs, int row) throws SQLException{
         return new AuthInfo(rs.getLong("id"), rs.getString("account"), rs.getString("password"));
+    }
+    
+    private User mapUserInfo(ResultSet rs, int row) throws SQLException{
+        return new User(rs.getLong("id"), rs.getLong("authid"), rs.getString("firstName"), rs.getString("lastName"), rs.getString("nickname"), rs.getString("email"));
     }
     
 }
