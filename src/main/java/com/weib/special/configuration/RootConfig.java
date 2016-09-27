@@ -11,6 +11,7 @@ import com.weib.special.repository.runtime.db.DBUserRepository;
 import java.beans.PropertyVetoException;
 import java.util.Properties;
 import javax.sql.DataSource;
+import org.springframework.beans.factory.config.BeanPostProcessor;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
@@ -18,6 +19,7 @@ import org.springframework.context.annotation.ComponentScan.Filter;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.FilterType;
 import org.springframework.context.support.ResourceBundleMessageSource;
+import org.springframework.dao.annotation.PersistenceExceptionTranslationPostProcessor;
 import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
@@ -66,7 +68,7 @@ public class RootConfig {
     
     @Bean
     /**
-     * 使用第三方连接池
+     * 使用第三方连接池c3p0
      */
     public DataSource datasource() throws PropertyVetoException{
         ComboPooledDataSource ds = new ComboPooledDataSource();
@@ -83,6 +85,10 @@ public class RootConfig {
     }
     
     @Bean
+    /**
+     * 创建一个适用于Hibernate5的SessionFactory
+     * 注入DataSource
+     */
     public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
         LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
         sf.setDataSource(dataSource);
@@ -91,6 +97,14 @@ public class RootConfig {
         p.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
         sf.setHibernateProperties(p);
         return sf;
+    }
+    
+    @Bean
+    /**
+     * 创建异常转换功能，会自动给所有@Repository的类加一个通知器（advisor）
+     */
+    public BeanPostProcessor persistenceTranslation(){
+        return new PersistenceExceptionTranslationPostProcessor();
     }
     
     @Bean
