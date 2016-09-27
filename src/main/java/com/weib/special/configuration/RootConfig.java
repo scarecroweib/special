@@ -5,8 +5,11 @@
  */
 package com.weib.special.configuration;
 
+import com.mchange.v2.c3p0.ComboPooledDataSource;
 import com.weib.special.repository.UserRepository;
 import com.weib.special.repository.runtime.db.DBUserRepository;
+import java.beans.PropertyVetoException;
+import java.util.Properties;
 import javax.sql.DataSource;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
@@ -19,6 +22,7 @@ import org.springframework.jdbc.core.JdbcOperations;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.namedparam.NamedParameterJdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
+import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 
 /**
@@ -39,24 +43,54 @@ public class RootConfig {
         return ms;
     }
     
+//    @Bean
+//    /**
+//     * 定义JDBC数据源
+//     * DriverManagerDataSource:每次访问创建一个新的连接
+//     * SimpleDriverDataSource:与DriverManagerDataSource相似，直接使用JDBC驱动
+//     * SingleConnectionDataSource:只有一个连接的连接池
+//     * 
+//     * 另外还可以使用
+//     * 1.JNDI数据源（定义在server.xml中的JNDI）
+//     * 2.第三方连接池
+//     */
+//    public DataSource datesource(){
+//        DriverManagerDataSource datasource = new DriverManagerDataSource();
+//        datasource.setDriverClassName("org.gjt.mm.mysql.Driver");
+//        datasource.setUrl("jdbc:mysql://localhost:3306/special_db");
+//        datasource.setUsername("root");
+//        datasource.setPassword("");
+//        return datasource; 
+//    }
+//    
+    
     @Bean
     /**
-     * 定义JDBC数据源
-     * DriverManagerDataSource:每次访问创建一个新的连接
-     * SimpleDriverDataSource:与DriverManagerDataSource相似，直接使用JDBC驱动
-     * SingleConnectionDataSource:只有一个连接的连接池
-     * 
-     * 另外还可以使用
-     * 1.JNDI数据源（定义在server.xml中的JNDI）
-     * 2.第三方连接池
+     * 使用第三方连接池
      */
-    public DataSource datesource(){
-        DriverManagerDataSource datasource = new DriverManagerDataSource();
-        datasource.setDriverClassName("org.gjt.mm.mysql.Driver");
-        datasource.setUrl("jdbc:mysql://localhost:3306/special_db");
-        datasource.setUsername("root");
-        datasource.setPassword("");
-        return datasource; 
+    public DataSource datasource() throws PropertyVetoException{
+        ComboPooledDataSource ds = new ComboPooledDataSource();
+        ds.setDriverClass("com.mysql.jdbc.Driver");
+        ds.setJdbcUrl("jdbc:mysql://localhost:3306/special_db");
+        ds.setUser("root");
+        ds.setPassword("");
+        
+        ds.setInitialPoolSize(10);
+        ds.setMaxPoolSize(50);
+        ds.setMinPoolSize(1);
+        
+        return ds;
+    }
+    
+    @Bean
+    public LocalSessionFactoryBean sessionFactory(DataSource dataSource){
+        LocalSessionFactoryBean sf = new LocalSessionFactoryBean();
+        sf.setDataSource(dataSource);
+        sf.setPackagesToScan(new String[] {"com.weib.special.data"});
+        Properties p = new Properties();
+        p.setProperty("dialect", "org.hibernate.dialect.MySQL5Dialect");
+        sf.setHibernateProperties(p);
+        return sf;
     }
     
     @Bean
@@ -75,7 +109,6 @@ public class RootConfig {
     public NamedParameterJdbcTemplate namedParamTemplate(DataSource datasource){
         return new NamedParameterJdbcTemplate(datasource);
     }
-    
     
 //    @Bean 
 //    /**

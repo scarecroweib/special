@@ -5,8 +5,12 @@
  */
 package com.weib.special.controller;
 
+import com.weib.special.data.Book;
 import com.weib.special.data.User;
+import com.weib.special.repository.BookRepository;
 import com.weib.special.repository.UserRepository;
+import java.util.ArrayList;
+import java.util.List;
 import org.junit.Test;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.when;
@@ -28,7 +32,12 @@ public class UserControllerTest {
         UserRepository userRepository = mock(UserRepository.class);
         when(userRepository.findById(1L)).thenReturn(user);
         
-        UserController controller = new UserController(userRepository);
+        BookRepository bookRepository = mock(BookRepository.class);
+        List<Book> books = new ArrayList();
+        books.add(new Book(1L, 1L, "book1"));
+        when(bookRepository.getAllBooks()).thenReturn(books);
+        
+        UserController controller = new UserController(userRepository, bookRepository);
         MockMvc mockMvc = standaloneSetup(controller).build();
         
         mockMvc.perform(get("/user/profile"))
@@ -43,7 +52,12 @@ public class UserControllerTest {
         UserRepository userRepository = mock(UserRepository.class);
         when(userRepository.findById(1L)).thenReturn(user);
         
-        UserController controller = new UserController(userRepository);
+        BookRepository bookRepository = mock(BookRepository.class);
+        List<Book> books = new ArrayList();
+        books.add(new Book(1L, 1L, "book1"));
+        when(bookRepository.getAllBooks()).thenReturn(books);
+        
+        UserController controller = new UserController(userRepository, bookRepository);
         MockMvc mockMvc = standaloneSetup(controller).build();
         
         mockMvc.perform(get("/user/1"))
